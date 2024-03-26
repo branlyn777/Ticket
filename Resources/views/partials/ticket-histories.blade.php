@@ -267,7 +267,7 @@
                                     <i class="ti-ticket"></i>
                                     <strong><small>Archivio:</small></strong><br>
                                     @foreach($singleLog->ticketAttachments as $archivio)
-                                        <a class="text-primary" href="{{ route('ticketAttachmentDownload', ['id' => $archivio['id']]) }}" download="{{ $archivio['file_path'] }}">{{ substr($archivio['file_path'], 0, 17) }}...</a><br>
+                                        <a class="text-primary" href="{{ route('ticketAttachmentDownload', ['id' => $archivio->id]) }}" download="{{ $archivio->attachment }}">{{ substr($archivio->attachment, 0, 17) }}...</a><br>
                                     @endforeach
                                 </div>
                                 

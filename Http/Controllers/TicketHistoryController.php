@@ -23,7 +23,7 @@ class TicketHistoryController extends Controller
         if ($checkScrivania) {
 
             $ticketId = base64_decode($request->ticket);
-
+            
             $getLogs = Activity::where('log_name', 'ticket')
                             ->where('subject_id', $ticketId)
                             ->orderBy('activity_log.id', 'desc')
@@ -41,16 +41,12 @@ class TicketHistoryController extends Controller
                             )
                             ->get();
             foreach ($getLogs as $key => $getLog) {
-                $ticketAttachments = TicketAttachment::where('id', @$getLog->properties['ticket_attachment_id'])->get()->map(function ($attachment) {
-                    $attachment->file_path = $attachment->attachment;
-                    unset($attachment->attachment);
-                    return $attachment;
-                });
+                $ticketAttachments = TicketAttachment::where('ticket_id', $ticketId)->get();
                 $user = User::where('id', $getLog->causer_id)->first();
                 $getLog['userAvatar'] = $user ? $user->getAvatar() : asset('/assets/images/default_avatar.png');
                 $getLog['userName'] = $user ? $user->getFullName() : $getLog->properties['author'];
                 $getLog['projectTask'] = ProjectTask::where('id', $getLog->properties['projectTaskId'])->with('project')->first();
-                $getLog['ticketAttachments'] = json_decode($ticketAttachments, true);;
+                $getLog['ticketAttachments'] = $ticketAttachments;
             }
             
             $ticket = Ticket::find($ticketId);
