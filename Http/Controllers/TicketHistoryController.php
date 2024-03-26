@@ -46,11 +46,11 @@ class TicketHistoryController extends Controller
                     unset($attachment->attachment);
                     return $attachment;
                 });
-
                 $user = User::where('id', $getLog->causer_id)->first();
                 $getLog['userAvatar'] = $user ? $user->getAvatar() : asset('/assets/images/default_avatar.png');
                 $getLog['userName'] = $user ? $user->getFullName() : $getLog->properties['author'];
                 $getLog['projectTask'] = ProjectTask::where('id', $getLog->properties['projectTaskId'])->with('project')->first();
+                $getLog['ticketAttachments'] = json_decode($ticketAttachments, true);;
             }
             
             $ticket = Ticket::find($ticketId);
@@ -81,7 +81,7 @@ class TicketHistoryController extends Controller
             $historyUser = !empty($ticketHistoryResponse['historyUser'])?$ticketHistoryResponse['historyUser']:[];
             $ticket = !empty($ticketHistoryResponse['ticket'])?$ticketHistoryResponse['ticket']:[];
         }
-
+        // dd($getLogs);
         return view('ticket::partials.ticket-histories',[
             'getLogs' => $getLogs,
             'ticketId' => $ticketId,

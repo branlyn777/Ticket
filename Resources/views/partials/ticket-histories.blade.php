@@ -259,6 +259,23 @@
                                 </div>
                                 @endif
                             </div>
+                            <div class="row">
+                                
+                                @if($checkScrivania)
+
+                                <div class="col-md-4 mb-2">
+                                    <i class="ti-ticket"></i>
+                                    <strong><small>Archivio:</small></strong><br>
+                                    @foreach($singleLog->ticketAttachments as $archivio)
+                                        <a class="text-primary" href="{{ route('ticketAttachmentDownload', ['id' => $archivio['id']]) }}" download="{{ $archivio['file_path'] }}">{{ substr($archivio['file_path'], 0, 17) }}...</a><br>
+                                    @endforeach
+                                </div>
+                                
+
+
+                                @endif
+
+                            </div>
                             @if($hideClosed)
                             <div class="row">
                                 <div class="col-md-4 mb-2">

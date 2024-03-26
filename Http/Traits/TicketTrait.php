@@ -38,7 +38,7 @@ trait TicketTrait
 
 
         $f['subject'] = array(
-            'col'  => '6',
+            'col'  => '12',
             'label'  => Form::label('subject', Lang::get('main.subject'),['class'=>'']),
             'value' => Form::text('subject', null, array('class' => 'form-control ','placeholder' => Lang::get('main.subject')))
         );

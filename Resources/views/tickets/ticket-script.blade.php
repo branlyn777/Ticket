@@ -454,7 +454,7 @@
                 },
                 success: function (response) {
                     if (response.success == true) {
-                        vanillaAlert(response.message, 'success');
+                        // vanillaAlert(response.message, 'success');
                         $getClosetrow.remove();
                     }
                 },
@@ -561,7 +561,7 @@ $(document).delegate(".remove-file", "click", function() {
             success: function(response) {
                 if (response.vanillaStatus == 'success') {
                     $('.save-ticket').find('button[type="submit"]').prop('disabled', true);
-                    vanillaAlert(response.vanillaTitle, 'success');
+                    // vanillaAlert(response.vanillaTitle, 'success');
                     location.reload();
                 }else{
                     vanillaAlert(response.vanillaTitle, 'error');
